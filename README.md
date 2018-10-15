@@ -1,6 +1,10 @@
 # Introduction
 
-Template for writing an **npm** package that adds widgets (UI Components) to [ContentService.io](http://contentservice.io).
+1. [ContentService.io](http://contentservice.io) provides Content editing functionality to VueJS and Nuxt projects.
+
+2. ContentService can be extended with custom _widgets_, allowing you to add application-specific widgets to your site.
+
+3. This project provides a template for creating reusable **npm** packages of custom widgets.
 
 
 # Full Documentation
