@@ -9,4 +9,4 @@
 
 # Full Documentation
 
-See the wiki page at [https://github.com/tooltwist/vue-whatever/wiki] for a full description of how to use this template.
+[See the wiki](https://github.com/tooltwist/vue-whatever/wiki) for a full description of how to use this template.
