@@ -32,7 +32,7 @@ When you use this template, you will get an npm package that can be used in VueJ
 
 Clone this project, and push it to your own repo, then play at will:
 
-    git clone zzzz myProject
+    git clone https://github.com/tooltwist/vue-whatever.git myProject
     cd myProject
     rm -rf .git; git add .; git commit -m 'Cloned from vue-whatever'
     git add remote origin <your repos URL>
