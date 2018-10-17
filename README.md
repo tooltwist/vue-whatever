@@ -28,6 +28,19 @@ When you use this template, you will get an npm package that can be used in VueJ
 
 
 
-# Full Guide
+# Getting Started
+
+Clone this project, and push it to your own repo, then play at will:
+
+    git clone zzzz myProject
+    cd myProject
+    rm -rf .git; git add .; git commit -m 'Cloned from vue-whatever'
+    git add remote origin <your repos URL>
+    git push origin master
+    
+Update `package.json` with your project name, edit the code and commit to github, then publish at will:
+
+    npm build-bundle
+    npm patch-release
 
 [See the wiki](https://github.com/tooltwist/vue-whatever/wiki) for a full description of how to use this template.
