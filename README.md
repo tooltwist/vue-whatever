@@ -1,10 +1,10 @@
 # Introduction
 
-1. [ContentService.io](http://contentservice.io) provides Content editing functionality to VueJS and Nuxt projects.
+1. [ContentService.io](http://contentservice.io) adds CMS functionality to VueJS and Nuxt projects.
 
-2. ContentService can be extended with custom _widgets_, allowing you to add application-specific widgets to your site.
+2. ContentService can be extended with custom _widgets_, allowing you to create reusable, application-specific widgets.
 
-3. This project provides a template for creating reusable **npm** packages of custom widgets.
+3. This project provides a template for creating **npm** packages of reusable custom widgets.
 
 # What you get
 
