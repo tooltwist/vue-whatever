@@ -5,7 +5,7 @@
       .tt-property
         .c-property-label Message
         .c-property-value
-          input.input(v-model="message")
+          input.input(v-model="myProperty")
 </template>
 
 <script>
@@ -19,13 +19,13 @@ export default {
     // We cannot update the element directly - it is stored
     // in this.$store and must be updated with a 'commit'.
     // See https://vuex.vuejs.org/en/forms.html
-    message: {
+    myProperty: {
       get () {
-        let value = this.element['message']
+        let value = this.element['myProperty']
         return value ? value : ''
       },
       set (value) {
-        this.$content.setProperty({ vm: this, element: this.element, name: 'message', value })
+        this.$content.setProperty({ vm: this, element: this.element, name: 'myProperty', value })
       }
     },
   },
@@ -39,11 +39,4 @@ export default {
       font-size: 9px;
     }
   }
-
-  .my-button {
-    position: absolute;
-    right: 5px;
-    cursor: pointer;
-  }
-
 </style>

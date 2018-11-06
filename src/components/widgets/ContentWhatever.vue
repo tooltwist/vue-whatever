@@ -10,19 +10,23 @@
       .c-layout-mode-heading
         edit-bar-icons(:element="element")
         | whatever
-      | Whatever 5
+      .whatever-box
+        | {{myProperty}}
 
     // Editing
     div(v-else-if="isPageMode('edit')", @click.stop="selectThisElement")
-      | Whatever 6
+      .whatever-box
+        | {{myProperty}}
 
     // layout
     div(v-else-if="isPageMode('layout')", @click.stop="selectThisElement")
-      | Whatever 7
+      .whatever-box
+        | {{myProperty}}
 
     // Live mode
     template(v-else)
-      | Whatever 8
+      .whatever-box
+        | {{myProperty}}
 </template>
 
 <script>
@@ -40,18 +44,21 @@ export default {
     }
   },
   computed: {
+    myProperty: {
+      get () {
+        let value = this.element['myProperty']
+        return value ? value : ''
+      },
+      set (value) {
+        this.$content.setProperty({ vm: this, element: this.element, name: 'myProperty', value })
+      }
+    }
 
   },
   methods: {
 
   }
 }
-
-/* function copyStyle(from, to, name) {
-  if (from[name]) {
-    to[name] = from[name]
-  }
-} */
 </script>
 
 <style lang="scss" scoped>
@@ -66,38 +73,11 @@ export default {
     color: $text-color;
   }
 
-  .c-edit-mode-debug {
-    border-left: dashed 2px $frame-color;
-    border-bottom: dashed 2px $frame-color;
-    border-right: dashed 2px $frame-color;
-    padding-bottom: 30px;
-
-    &.c-selected {
-      border-color: $c-editbar-color;
-    }
-  }
-
-  .my-doc-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    margin-top: $c-embed-margin-top;
-    margin-bottom: $c-embed-margin-bottom;
-
-    &.my-dummy-iframe {
-      background-color: $c-embed-border-color;
-    }
-
-    iframe,
-    object,
-    embed {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: solid 1px $c-embed-border-color;
-    }
+  .whatever-box {
+    width: 300px;
+    padding: 15px;
+    border: solid 1px #ccc;
+    text-align: center;
+    margin: 0 auto;
   }
 </style>
