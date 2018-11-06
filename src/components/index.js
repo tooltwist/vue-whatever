@@ -3,68 +3,58 @@
 import Vuex from 'vuex'
 
 // Our main class
-import Docservice from '../lib/DocService.js'
+import Whatever from '../lib/Whatever.js'
 
 // Our store
-import DocserviceStore from '../store/docserviceStore.js'
+import WhateverStore from '../store/whateverStore.js'
 
 // Our components
-import ContentGoogleSlides from './widgets/ContentGoogleSlides.vue'
-import ContentGoogleSlidesProps from './widgets/ContentGoogleSlidesProps.vue'
-import ContentGoogleSheets from './widgets/ContentGoogleSheets.vue'
-import ContentGoogleSheetsProps from './widgets/ContentGoogleSheetsProps.vue'
-import ContentGoogleDocs from './widgets/ContentGoogleDocs.vue'
-import ContentGoogleDocsProps from './widgets/ContentGoogleDocsProps.vue'
+import ContentWhatever from './widgets/ContentWhatever.vue'
+import ContentWhateverProps from './widgets/ContentWhateverProps.vue'
 
-let _Vue = null
-let _docservice = null
-let _store = null
+let _whatever = null
 
 
 function install (Vue, options) {
-  console.log('Docservice.install()', options)
-  if (_docservice) {
-    console.error("Vue.use(Docservice) has already been called.")
+  console.log('Whatever.install()', options)
+  if (_whatever) {
+    console.error("Vue.use(Whatever) has already been called.")
     return
   }
   let tmpvue = new Vue()
   let $content = tmpvue.$content
   if ( !$content) {
-    console.error("$content not defined. Please register ContentService before cslling Vue.use(Docservice).")
+    console.error("$content not defined. Please register ContentService before cslling Vue.use(Whatever).")
     return
   }
 
-  _Vue = Vue
-
-  // Create ourselves a Docservice Object
-  _docservice = new Docservice(options)
-
-  const isDef = v => v !== undefined
+  // Create ourselves a Whatever Object
+  _whatever = new Whatever(options)
 
   // Vue.mixin adds an additional 'beforeCreate' function to it's
   // list of functions to be called when new Vue is created. We'll
-  // use it to look for new Vue({ Docservice }). If found, we'll
+  // use it to look for new Vue({ Whatever }). If found, we'll
   // consider this to be the root. If it is not found, then we will
   // assume this is a child of the root, and create pointers back
   // to the root.
   //Vue.mixin({
   Vue.mixin({
     beforeCreate () {
-      // console.log('vue-docservice: index.js - beforeCreate()')
+      // console.log('vue-whatever: index.js - beforeCreate()')
 
       if (!this.$parent) {
-      //if (isDef(this.$options.docservice)) {
+      //if (isDef(this.$options.whatever)) {
         // console.error('Initializing ROOT *********')
-        // This must be the root, since we found docservice in it's options.
-        this._docserviceRoot = this
-        this._docservice = _docservice
-        // this._docservice.init(this)
-        Vue.util.defineReactive(this, '_docservice', this.$docservice)
-        // Vue.util.defineReactive(this, '_docservice', this._docservice.jwt)
-        // Vue.util.defineReactive(this, '_docservice', this._docservice.fromCache)
+        // This must be the root, since we found whatever in it's options.
+        this._whateverRoot = this
+        this._whatever = _whatever
+        // this._whatever.init(this)
+        Vue.util.defineReactive(this, '_whatever', this.$whatever)
+        // Vue.util.defineReactive(this, '_whatever', this._whatever.jwt)
+        // Vue.util.defineReactive(this, '_whatever', this._whatever.fromCache)
       } else {
         //console.log('Initialise new child')
-        this._docserviceRoot = this.$parent._docserviceRoot
+        this._whateverRoot = this.$parent._whateverRoot
       }
     },
     destroyed () {
@@ -73,63 +63,96 @@ function install (Vue, options) {
   })
 
   // As described above, the Vue instances form a hierachy. The mixin
-  // above ensures that each instance has an '_docserviceRoot' field
-  // that points to the instance where 'docservice' was passed to new Vue({  }).
-  // Note that it's _docserviceRoot might actually point to itself.
-  Object.defineProperty(Vue.prototype, '$docservice', {
-    get () { return this._docserviceRoot._docservice }
+  // above ensures that each instance has an '_whateverRoot' field
+  // that points to the instance where 'whatever' was passed to new Vue({  }).
+  // Note that it's _whateverRoot might actually point to itself.
+  Object.defineProperty(Vue.prototype, '$whatever', {
+    get () { return this._whateverRoot._whatever }
   })
 
 
   /*
-   *  Register our components with Contentservice
+   *  Register our widgets with Contentservice
    */
-  $content.registerLayoutType(Vue, 'google-slides', 'content-google-slides', ContentGoogleSlides, ContentGoogleSlidesProps)
-  $content.registerLayoutType(Vue, 'google-sheets', 'content-google-sheets', ContentGoogleSheets, ContentGoogleSheetsProps)
-  $content.registerLayoutType(Vue, 'google-docs', 'content-google-docs', ContentGoogleDocs, ContentGoogleDocsProps)
 
-  return _docservice
+   // 'whatever' Widget
+   $content.registerWidget(Vue, {
+     name: 'whatever',
+     label: 'Whatever',
+     category: '',
+     iconClass: 'fa fa-vimeo',
+     iconClass5: 'fab fa-vimeo',
+     dragtype: 'component',
+
+     // Register native Vue templates
+     componentName: 'content-whatever',
+     component: ContentWhatever,
+     propertyComponent: ContentWhateverProps,
+
+     // Identical structure to a CUT or COPY from edit mode.
+     data: {
+       type: "contentservice.io",
+       version: "1.0",
+       source: "toolbox",
+       layout: {
+         type: 'whatever',
+       }
+     }
+   })
+
+  // Initialise the store
+  Vue.use(Vuex)
+  let store = new Vuex.Store(WhateverStore);
+  _whatever.store = store
+
+  return _whatever
 } //- install()
 
-const obj = {
+const WhateverLib = {
   install: install,
 }
 
-Object.defineProperty(obj, '_docservice', {
-  get: function() {
-      return _docservice
-  }
-});
+// Object.defineProperty(WhateverLib, '_whatever', {
+//   get: function() {
+//       return _whatever
+//   }
+// });
+//
+// Object.defineProperty(WhateverLib, 'storeDefinition', {
+//   get: function() {
+//     console.error('storeDefinition getter (in whatever)')
+//     return WhateverStore
+//   }
+// });
+//
+// Object.defineProperty(WhateverLib, 'whateverStoreDefinition', {
+//   get: function() {
+//     console.error('whateverStoreDefinition getter')
+//     return WhateverStore
+//   }
+// });
+//
+// Object.defineProperty(WhateverLib, 'store', {
+//   get: function() {
+//     if (_store) {
+//       return _store
+//     }
+//
+//     // Create a new store object
+//     _Vue.use(Vuex)
+//     _store = new Vuex.Store({
+//       modules: {
+//         whatever: WhateverStore
+//       }
+//     });
+//     return _store;
+//   }
+// });
 
-Object.defineProperty(obj, 'storeDefinition', {
-  get: function() {
-    console.error('storeDefinition getter (in docservice)')
-    return DocserviceStore
-  }
-});
+export default WhateverLib
 
-Object.defineProperty(obj, 'docserviceStoreDefinition', {
-  get: function() {
-    console.error('docserviceStoreDefinition getter')
-    return DocserviceStore
-  }
-});
 
-Object.defineProperty(obj, 'store', {
-  get: function() {
-    if (_store) {
-      return _store
-    }
-
-    // Create a new store object
-    _Vue.use(Vuex)
-    _store = new Vuex.Store({
-      modules: {
-        docservice: DocserviceStore
-      }
-    });
-    return _store;
-  }
-});
-
-export default obj
+// This is used when the npm package is included into an HTML page
+if (typeof window !== "undefined" && window.Vue) {
+  window.Whatever = WhateverLib
+}

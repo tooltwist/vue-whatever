@@ -1,5 +1,5 @@
 {
-  "name": "vue-docservice",
+  "name": "vue-whatever",
   "version": "0.1.72",
   "private": false,
   "scripts": {
@@ -8,7 +8,7 @@
     "test": "vue-cli-service build",
     "e2e": "vue-cli-service e2e",
     "lint": "vue-cli-service lint",
-    "build-bundle": "vue-cli-service build --target lib --name vue-docservice ./src/components/index.js",
+    "build-bundle": "vue-cli-service build --target lib --name vue-whatever ./src/components/index.js",
     "e2e:open": "vue-cli-service e2e:open",
     "patch-release": "npm version patch && npm publish --registry=https://registry.npmjs.org/ && git push --follow-tags",
     "p1": "npm version patch",
@@ -80,7 +80,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/tooltwist/vue-docservice.git"
+    "url": "https://github.com/tooltwist/vue-whatever.git"
   },
   "files": [
     "dist/*",
@@ -89,13 +89,13 @@
     "*.json",
     "*.js"
   ],
-  "author": "Philip Callender <philip.callender@tooltwist.com",
-  "description": "VueJS plugin for docservice.io",
+  "author": "Joe Bloggs <joe.bloggs@acme.com",
+  "description": "VueJS plugin for whatever.io",
   "license": "MIT",
-  "main": "./dist/vue-docservice.common.js",
+  "main": "./dist/vue-whatever.common.js",
   "keywords": [
     "vue",
     "tooltwist",
-    "docservice"
+    "whatever"
   ]
 }

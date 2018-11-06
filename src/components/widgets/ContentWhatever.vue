@@ -1,23 +1,24 @@
 <template lang="pug">
 
-  .c-google-slides(v-bind:class="[ editModeClass, (pageEditMode=='debug') ? 'tt-container-outline' : '']")
+
+  .c-google-docs(v-bind:class="[ editModeClass, (pageEditMode=='debug') ? 'tt-container-outline' : '']")
 
     // View mode
     .container(v-if="pageEditMode==='view'")
-      .my-slides-container
-        iframe(v-bind:src="src" frameborder="0" zwidth="640" zheight="389" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true")
+      .my-doc-container
+        iframe(:src="src")
 
     // Debug mode
     div(v-else-if="pageEditMode==='debug'", v-on:click.stop="select(element)")
       .c-layout-mode-heading
         edit-bar-icons(:element="element")
-        | google slides
+        | google doc
       .container
-        .my-slides-container.my-dummy-iframe
+        .my-doc-container.my-dummy-iframe
 
     // Edit, layout modes
     .container(v-else, v-on:click.stop="select(element)")
-      .my-slides-container.my-dummy-iframe
+      .my-doc-container.my-dummy-iframe
 </template>
 
 <script>
@@ -25,7 +26,7 @@ import ContentMixins from '../../mixins/ContentMixins'
 import CutAndPasteMixins from '../../mixins/CutAndPasteMixins'
 
 export default {
-  name: 'content-google-slides',
+  name: 'content-google-docs',
   props: {
     element: Object,
   },
@@ -35,34 +36,17 @@ export default {
       //docId: '2PACX-1vT14-yIpiY4EbQN0XscNBhMuJDZ-k4n03-cWPEgK_kyCTP35ehchuWiPDrTq2TIGYl6nFToRGQRJXZl',
     }
   },
-  watch: {
-    '$store.state.docservice.refreshCounter': function ( ) {
-      console.log(`^&#^%$&^%$ WATCHED CHANGED REFRESHCOUNTER`);
-    }
-  },
   computed: {
 
-    // docID: function () {
-    //   let value = this.element['docID']
-    //   return value ? value : ''
-    // },
-    //
-    // replacementDocID: function ( ) {
-    //   let value = this.element['docID']
-    //   if (value) {
-    //     // Use a preview version of the sheet
-    //     // console.log(`compute docID 1`, this.$store);
-    //     let userID = null //ZZZZZZ
-    //     let replacementDocID = this.$store.getters['docservice/replacementDocID'](value, userID)
-    //
-    //     console.log(`replacementDocID: ${value} -> ${replacementDocID}`);
-    //     return replacementDocID
-    //   }
-    //   return ''
-    // },
+    //- src: function ( ) {
+    //-   //let src = `https://docs.google.com/a/tooltwist.com/presentation/d/e/${this.element.docID}/embed?start=false&loop=false&delayms=3000`
+    //-   let src = `https://docs.google.com/a/tooltwist.com/document/d/e/${this.element.docID}/pub?embedded=true`
+    //-   console.log(`url=${src}`)
+    //-   return src
+    //- },
 
     src: function ( ) {
-      console.log(`ContentGoogleSlides METHOD src`, this.$store.getters);
+      console.log(`ContentGoogleDocs METHOD src`, this.$store.getters);
 
       let docID = this.element['docID']
       if (docID) {
@@ -75,10 +59,10 @@ export default {
 
           // Get the substitute document ID we'll use for this user.
           let userID = null //ZZZZZZ
-          let replacementDocID = this.$store.getters['docservice/replacementDocID'](docID, userID)
+          let replacementDocID = this.$whatever.store.getters['replacementDocID'](docID, userID)
 
-          console.error(`slides replacementDocID: ${docID} -> ${replacementDocID}`);
-          let src = `https://docs.google.com/presentation/d/${replacementDocID}/preview?slide=id.p1`
+          console.log(`docs replacementDocID: ${docID} -> ${replacementDocID}`);
+          let src = `https://docs.google.com/a/tooltwist.com/document/d/e/${replacementDocID}/pub?embedded=true`
           console.log(`unpublished url=${src}`)
           return src
         }
@@ -95,11 +79,6 @@ export default {
       copyStyle(this.element, style, 'padding-left')
       copyStyle(this.element, style, 'padding-right')
       return style
-    }
-  },
-  watch: {
-    refreshCounter (oldvalue, newvalue) {
-      console.log(`Slides refreshCounter changed from ${oldvalue} to ${newvalue}.`);
     }
   },
   methods: {
@@ -142,7 +121,7 @@ export default {
     }
   }
 
-  .my-slides-container {
+  .my-doc-container {
     position: relative;
     padding-bottom: 56.25%;
     height: 0;
