@@ -1,24 +1,28 @@
 <template lang="pug">
 
-
-  .c-google-docs(v-bind:class="[ editModeClass, (pageEditMode=='debug') ? 'tt-container-outline' : '']")
-
-    // View mode
-    .container(v-if="pageEditMode==='view'")
-      .my-doc-container
-        iframe(:src="src")
+  .c-content-whatever(:class="editModeClass")
+    span(v-if="extraDebug")
+      | &lt;content-whatever&gt;
+      br
 
     // Debug mode
-    div(v-else-if="pageEditMode==='debug'", v-on:click.stop="select(element)")
+    div(v-if="isPageMode('debug')", @click.stop="selectThisElement")
       .c-layout-mode-heading
         edit-bar-icons(:element="element")
-        | google doc
-      .container
-        .my-doc-container.my-dummy-iframe
+        | whatever
+      | Whatever 5
 
-    // Edit, layout modes
-    .container(v-else, v-on:click.stop="select(element)")
-      .my-doc-container.my-dummy-iframe
+    // Editing
+    div(v-else-if="isPageMode('edit')", @click.stop="selectThisElement")
+      | Whatever 6
+
+    // layout
+    div(v-else-if="isPageMode('layout')", @click.stop="selectThisElement")
+      | Whatever 7
+
+    // Live mode
+    template(v-else)
+      | Whatever 8
 </template>
 
 <script>
@@ -26,68 +30,20 @@ import ContentMixins from '../../mixins/ContentMixins'
 import CutAndPasteMixins from '../../mixins/CutAndPasteMixins'
 
 export default {
-  name: 'content-google-docs',
+  name: 'content-whatever',
   props: {
     element: Object,
   },
   mixins: [ ContentMixins, CutAndPasteMixins ],
   data: function () {
     return {
-      //docId: '2PACX-1vT14-yIpiY4EbQN0XscNBhMuJDZ-k4n03-cWPEgK_kyCTP35ehchuWiPDrTq2TIGYl6nFToRGQRJXZl',
     }
   },
   computed: {
 
-    //- src: function ( ) {
-    //-   //let src = `https://docs.google.com/a/tooltwist.com/presentation/d/e/${this.element.docID}/embed?start=false&loop=false&delayms=3000`
-    //-   let src = `https://docs.google.com/a/tooltwist.com/document/d/e/${this.element.docID}/pub?embedded=true`
-    //-   console.log(`url=${src}`)
-    //-   return src
-    //- },
-
-    src: function ( ) {
-      console.log(`ContentGoogleDocs METHOD src`, this.$store.getters);
-
-      let docID = this.element['docID']
-      if (docID) {
-        if (docID.startsWith('2PACX-')) {
-          // Use the published version of the file
-          let src = `https://docs.google.com/a/tooltwist.com/presentation/d/e/${this.element.docID}/embed?start=false&loop=false&delayms=3000`
-          console.log(`published url=${src}`)
-          return src
-        } else {
-
-          // Get the substitute document ID we'll use for this user.
-          let userID = null //ZZZZZZ
-          let replacementDocID = this.$whatever.store.getters['replacementDocID'](docID, userID)
-
-          console.log(`docs replacementDocID: ${docID} -> ${replacementDocID}`);
-          let src = `https://docs.google.com/a/tooltwist.com/document/d/e/${replacementDocID}/pub?embedded=true`
-          console.log(`unpublished url=${src}`)
-          return src
-        }
-      }
-      return ''
-    },
-
-    sectionStyle: function () {
-      let style = { }
-      copyStyle(this.element, style, 'background-color')
-      copyStyle(this.element, style, 'padding')
-      copyStyle(this.element, style, 'padding-top')
-      copyStyle(this.element, style, 'padding-bottom')
-      copyStyle(this.element, style, 'padding-left')
-      copyStyle(this.element, style, 'padding-right')
-      return style
-    }
   },
   methods: {
-    select (element) {
-      console.log(`select()`, element)
-      if (this.pageEditMode != 'view') {
-        this.$store.commit('contentLayout/setPropertyElement', { element })
-      }
-    },
+
   }
 }
 
