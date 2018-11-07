@@ -46,8 +46,9 @@ Open the project in your edit and...
 
 Commit to github, then publish at will:
 
-    npm run build-bundle
-    npm run patch-release
+    yarn install
+    yarn build-bundle
+    yarn patch-release
 
 To create new widgets, you can copy and modify the example widget files in src/components/widgets:
 
