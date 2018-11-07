@@ -43,10 +43,10 @@ Open the project in your edit and...
 1. Update `package.json` with your project name
 1. Globally substitute 'whatever' with your project name with the first character _in lower case_.
 1. Globally substitute 'Whatever' with your project name with the first character _in upper case_.
-1. git mv src/lib/Whatever.js src/lib/`Projectname`.js
-1. git mv src/store/WhateverStore.js src/store/`Projectname`Store.js
-1. git mv src/components/widgets/ContentWhatever.vue src/components/widgets/Content`Projectname`.vue
-1. git mv src/components/widgets/ContentWhateverProps.vue src/components/widgets/Content`Projectname`Props.vue
+1. git mv src/lib/Whatever.js src/lib/**Projectname**.js
+1. git mv src/store/WhateverStore.js src/store/**Projectname**Store.js
+1. git mv src/components/widgets/ContentWhatever.vue src/components/widgets/Content**Projectname**.vue
+1. git mv src/components/widgets/ContentWhateverProps.vue src/components/widgets/Content**Projectname**Props.vue
 
 Commit to github, then publish at will:
 
