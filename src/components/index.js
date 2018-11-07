@@ -6,7 +6,7 @@ import Vuex from 'vuex'
 import Whatever from '../lib/Whatever.js'
 
 // Our store
-import WhateverStore from '../store/whateverStore.js'
+import WhateverStore from '../store/WhateverStore.js'
 
 // Our components
 import ContentWhatever from './widgets/ContentWhatever.vue'
