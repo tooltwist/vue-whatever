@@ -47,6 +47,7 @@ Open the project in your edit and...
 1. git mv src/store/WhateverStore.js src/store/**Projectname**Store.js
 1. git mv src/components/widgets/ContentWhatever.vue src/components/widgets/Content**Projectname**.vue
 1. git mv src/components/widgets/ContentWhateverProps.vue src/components/widgets/Content**Projectname**Props.vue
+1. Modify README.md to explain what this widget library does.
 
 Commit to github, then publish at will:
 
