@@ -36,7 +36,10 @@ import CutAndPasteMixins from '../../mixins/CutAndPasteMixins'
 export default {
   name: 'content-whatever',
   props: {
-    element: Object,
+    element: {
+      type: Object,
+      required: true
+    }
   },
   mixins: [ ContentMixins, CutAndPasteMixins ],
   data: function () {
@@ -44,6 +47,7 @@ export default {
     }
   },
   computed: {
+
     myProperty: {
       get () {
         let value = this.element['myProperty']

@@ -1,31 +1,15 @@
 <template lang="pug">
-  //
-  //  No left pane, not fixed to window.
-  //
   div#app
-    .above-my-triple-pane
-      a(href="/")
-        img(src="../assets/logo.png")
+    img.is-pulled-left(src="../assets/logo.png")
+    br
+    h1.title.is-3.has-text-left
+      | Standalone Widget
       br
-      h1.title.is-3 Google Sheets Variants
-    //content-layout-editor#my-triple-pane(:editcontext="editcontext", editable="false", :contentdata="contentdata", :type="typeN", :anchorN="anchorN")
-    content-layout-editor.my-triple-pane(:editable="editable", :anchor="anchor", height="300px", editingHeight="600px")
+      a.other-mode(href="/in-layout") Use this widget in a layout
 
-      template(slot="middle-pane")
-        //content-layout2(type="fixed", :layout="layoutZ", :editcontext="editcontext")
-        | HERE IS THE MIDDLE PANE
-        .my-box
-        .my-box
-        .my-box
-        .my-box
-        .my-box
-        .my-box
-        .my-box
-        .my-box
-        .my-box
-        br
-        | end
-    | After Content.
+    hr
+    content-whatever(:element="{ myProperty: 'Hello' }")
+    hr
 </template>
 
 <script>
@@ -40,7 +24,7 @@ export default {
       // NEW
       leftPane: true,
       editable: true,
-      anchor: 'test.google.sheets.variants',
+      anchor: 'mbc.test.layout',
       /*
       editable: Boolean,
       anchor: {
@@ -108,11 +92,14 @@ export default {
 }
 </script>
 
-<style lang="sass" src="bulma"></style>
-
 <style lang="scss" scoped>
 
-$border-color: #ee0000;
+$border-color: #eee;
+
+
+// Positioning of the footer
+$above-triple-pane-size: 130;
+$below-triple-pane-size: 80;
 
 
 // Positioning of the footer
@@ -132,30 +119,8 @@ $below-triple-pane-size: 80;
     float: left;
   }
 }
-.above-my-triple-pane {
-  // display: block;
-  // top: 0px;
-  height: #{$above-triple-pane-size}px;
-  padding: 0px;
-}
 
-// DOC_NOTE:
-// This magic gives the pane a fixed size while editing. Without
-// this the rsize bars will not be set.
-//
-.my-triple-pane /deep/ .c-editing-layout {
-  height: calc(100vh - #{$above-triple-pane-size + $below-triple-pane-size}px);
-}
-
-.my-triple-pane /deep/ .c-editing-layout {
-  border: solid 1px $border-color;
-}
-
-.my-box {
-  display: block;
-  border: solid 2px blue;
-  width: 200px;
-  height: 120px;
-  margin-bottom: 10px;
+.other-mode {
+  font-size: 13px;
 }
 </style>

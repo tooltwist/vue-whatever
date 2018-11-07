@@ -1,15 +1,17 @@
 <template lang="pug">
-  //
-  //  No left pane, not fixed to window.
-  //
   div#app
-    .above-my-triple-pane
-      a(href="/")
-        img(src="../assets/logo.png")
+    img.is-pulled-left(src="../assets/logo.png")
+    br
+    h1.title.is-3.has-text-left
+      | Widget within a Layout
       br
-      h1.title.is-3 Long page
-    //content-layout-editor#my-triple-pane(:editcontext="editcontext", editable="false", :contentdata="contentdata", :type="typeN", :anchorN="anchorN")
-    content-layout-editor.my-triple-pane(:editable="editable", :anchor="anchor", height="300px", editingHeight="600px")
+      a.other-mode(href="/standalone") Use this widget standalone
+
+    content-layout-editor.my-triple-pane(:editable="editable", :anchor="anchor", zheight="300px", zeditingHeight="600px")
+
+      //template(slot="left-pane")
+      //  | This is the left pane
+
 
       template(slot="middle-pane")
         //content-layout2(type="fixed", :layout="layoutZ", :editcontext="editcontext")
@@ -20,11 +22,9 @@
         .my-box
         .my-box
         .my-box
-        .my-box
-        .my-box
-        .my-box
         br
         | end
+
     | After Content.
 </template>
 
@@ -40,20 +40,7 @@ export default {
       // NEW
       leftPane: true,
       editable: true,
-      anchor: 'mbc.test.layout',
-      /*
-      editable: Boolean,
-      anchor: {
-        required: false,
-        type: String
-      },
-      layout: {
-        required: false,
-        type: Object
-      }
-      */
-
-
+      anchor: 'whatever.test.layout',
 
       // OLD
       editcontext: {
@@ -110,7 +97,12 @@ export default {
 
 <style lang="scss" scoped>
 
-$border-color: #ee0000;
+$border-color: #eee;
+
+
+// Positioning of the footer
+$above-triple-pane-size: 130;
+$below-triple-pane-size: 80;
 
 
 // Positioning of the footer
@@ -136,17 +128,26 @@ $below-triple-pane-size: 80;
   height: #{$above-triple-pane-size}px;
   padding: 0px;
 }
-
-// DOC_NOTE:
-// This magic gives the pane a fixed size while editing. Without
-// this the rsize bars will not be set.
-//
-.my-triple-pane /deep/ .c-editing-layout {
+.my-triple-pane {
+  //height: $a3-footer-size;
+  //min-height: calc(100vh - #{$above-triple-pane-size}px);
   height: calc(100vh - #{$above-triple-pane-size + $below-triple-pane-size}px);
 }
 
-.my-triple-pane /deep/ .c-editing-layout {
+
+
+
+.my-triple-pane {
   border: solid 1px $border-color;
+  //height: 400px;
+  // border-top: solid 1px #666;
+  // border-bottom: solid 1px #666;
+  // border-left: solid 1px #ccc;
+  // border-right: solid 1px #ccc;
+}
+
+.other-mode {
+  font-size: 13px;
 }
 
 .my-box {
