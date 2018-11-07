@@ -66,4 +66,4 @@ Commit to github, then publish at will:
     yarn build-bundle
     yarn patch-release
 
-See the [ContentService documentation](https://contentservice.io) for a full description of how to use this template.
+See the [ContentService documentation](https://contentservice.io/v2/guide/) for a full description of how to use this template.
