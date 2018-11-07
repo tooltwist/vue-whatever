@@ -40,26 +40,30 @@ Clone this project, and push it to your own repo, then play at will:
     
 Open the project in your edit and...
 
-1. Update `package.json` with your project name
 1. Globally substitute 'whatever' with your project name with the first character _in lower case_.
 1. Globally substitute 'Whatever' with your project name with the first character _in upper case_.
 1. git mv src/lib/Whatever.js src/lib/**Projectname**.js
 1. git mv src/store/WhateverStore.js src/store/**Projectname**Store.js
 1. git mv src/components/widgets/ContentWhatever.vue src/components/widgets/Content**Projectname**.vue
 1. git mv src/components/widgets/ContentWhateverProps.vue src/components/widgets/Content**Projectname**Props.vue
-1. Modify README.md to explain what this widget library does.
+1. Update the description in `package.json`
+1. Modify `README.md` to explain what this widget library does.
 
-Commit to github, then publish at will:
+You can test your widget using:
 
     yarn install
-    yarn build-bundle
-    yarn patch-release
+    yarn serve
 
 To create new widgets, you can copy and modify the example widget files in src/components/widgets:
 
 - ContentWhatever.vue = the component displayed on the page
 - ContentWhateverProps.vue = a component to edit the properties when in editing mode.
+- Register your new widget using `$content.registerWidget` inside `src/components/index.js`.
 
-You can register your new widget using `$content.registerWidget` inside `src/components/index.js`.
 
-[See the wiki](https://github.com/tooltwist/vue-whatever/wiki) for a full description of how to use this template.
+Commit to github, then publish at will:
+
+    yarn build-bundle
+    yarn patch-release
+
+See the [ContentService documentation](https://contentservice.io) for a full description of how to use this template.
