@@ -34,13 +34,26 @@ Clone this project, and push it to your own repo, then play at will:
 
     git clone https://github.com/tooltwist/vue-whatever.git myProject
     cd myProject
-    rm -rf .git; git add .; git commit -m 'Cloned from vue-whatever'
-    git add remote origin <your repos URL>
-    git push origin master
+    rm -rf .git; git init; git add .; git commit -m 'Cloned from vue-whatever'
+    git remote add origin <your repos URL>
+    git push --set-upstream origin master
     
-Update `package.json` with your project name, edit the code and commit to github, then publish at will:
+Open the project in your edit and...
 
-    npm build-bundle
-    npm patch-release
+1. Update `package.json` with your project name
+2. Globally substitute 'whatever' with your project name with the first character _in lower case_.
+2. Globally substitute 'Whatever' with your project name with the first character _in upper case_.
+
+Commit to github, then publish at will:
+
+    npm run build-bundle
+    npm run patch-release
+
+To create new widgets, you can copy and modify the example widget files in src/components/widgets:
+
+- ContentWhatever.vue = the component displayed on the page
+- ContentWhateverProps.vue = a component to edit the properties when in editing mode.
+
+You can register your new widget using `$content.registerWidget` inside `src/components/index.js`.
 
 [See the wiki](https://github.com/tooltwist/vue-whatever/wiki) for a full description of how to use this template.
